@@ -23,9 +23,7 @@ namespace WpfApplication2
         public MainWindow()
         {
             InitializeComponent();
-            //hello2222 c cgcfg 
         }
     }
 }
-//ddddeeewewe
 //hello213
