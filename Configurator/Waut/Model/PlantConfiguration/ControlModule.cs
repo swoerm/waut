@@ -8,5 +8,6 @@ namespace Configurator.Waut.Model.PlantConfiguration
 {
     class ControlModule
     {
+        public string Name { get; set; }
     }
 }
