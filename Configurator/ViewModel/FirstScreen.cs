@@ -3,10 +3,9 @@
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
-using Configurator.Waut.Model.PlantConfiguration.model;
 using Microsoft.Practices.Prism.Commands;
 
-namespace Configurator.Waut.Model.PlantConfiguration.ViewModels
+namespace Configurator.ViewModels
 { 
     public class FirstScreen
     {
