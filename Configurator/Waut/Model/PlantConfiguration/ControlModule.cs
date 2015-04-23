@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Configurator.Waut.Model.PlantConfiguration
 {
-    class ControlModule
+    class Controlmodule
     {
         public string Name { get; set; }
     }
