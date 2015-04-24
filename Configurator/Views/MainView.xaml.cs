@@ -23,6 +23,8 @@ namespace Configurator.Views
         public MainView()
         {
             InitializeComponent();
+
         }
+
     }
 }
