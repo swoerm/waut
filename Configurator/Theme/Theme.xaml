@@ -341,18 +341,6 @@
                 Value="2" />
     </Style>
 
-    <!-- Tooltip image -->
-    <Style x:Key="ToolTipImageStyle"
-           TargetType="Image">
-        <Setter Property="Source"
-                Value="../Images/info.png"></Setter>
-        <Setter Property="Width"
-                Value="15"></Setter>
-        <Setter Property="Height"
-                Value="15"></Setter>
-        <Setter Property="Margin"
-                Value="2,0,0,0"></Setter>
-    </Style>
 
     <!-- Border -->
     <Style x:Key="BorderBrush"

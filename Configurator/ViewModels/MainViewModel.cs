@@ -6,10 +6,11 @@ using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Windows;
 
-namespace Configurator.Waut.Model.PlantConfiguration.MainViewModel
+namespace Configurator.ViewModels.MainViewModel
 {
     public class RelayCommand : ICommand
     {
+
         private Action<object> execute;
 
         private Predicate<object> canExecute;
@@ -145,6 +146,7 @@ namespace Configurator.Waut.Model.PlantConfiguration.MainViewModel
         {
             HiButtonCommand = new RelayCommand(ShowMessage, param => this.canExecute);
             toggleExecuteCommand = new RelayCommand(ChangeCanExecute);
+            
         }
 
         public void ShowMessage(object obj)
