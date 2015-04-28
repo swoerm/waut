@@ -13,5 +13,9 @@ namespace Configurator
     /// </summary>
     public partial class App : Application
     {
+
+
     }
 }
+
+   

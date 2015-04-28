@@ -4,32 +4,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title ="MainView" Height="500" Width="500">
 
-
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
 
     <Grid>
         <StackPanel  Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="SubmitButton"
-                        Command="{Binding SubmitCommand}"
-                        Content="Close"
-                        Height="23"
-                        HorizontalAlignment="Right"
-                        Width="75"
-                        Margin="10,0"
-                        AutomationProperties.AutomationId="SubmitButton"/>
 
-            <Button Width="100" Height="100" Content="{Binding ButtonContent}"/>
+            <Button Grid.Row="0" 
+             Content="{Binding HiButtonContent}"
+             Command="{Binding HiButtonCommand}" 
+             CommandParameter="Hai" 
+             Width="100" Height="100"  />
 
-            <Button Grid.Row="0" Command="{Binding HiButtonCommand}" 
-        CommandParameter="Hai" Content="{Binding HiButtonContent}"
-                Width="100"
-                Height="100"  />
+            <Button Grid.Row="1" 
+             Content="Toggle Can Click" 
+             Command="{Binding ToggleExecuteCommand}"  
+             Width="100" Height="100"/>
 
-            <Button Grid.Row="1" Content="Toggle Can Click" 
-        Command="{Binding ToggleExecuteCommand}"  Width="100" Height="100"/>
+            <Button  Grid.Row="2" 
+             Content="ReadData"
+             Command="{Binding ReadDataCommand}"  
+             Width="100" Height="100"  />
+
         </StackPanel>
-    </Grid>
-    
+    </Grid>    
 </Window>

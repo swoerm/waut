@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Mvvm;
+﻿using Configurator.ViewModels.MainViewModel;
+using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Configurator.Waut.Model.PlantConfiguration;
+using Configurator.Waut.Servers;
 
 namespace Configurator.Views
 {
@@ -23,7 +26,8 @@ namespace Configurator.Views
         public MainView()
         {
             InitializeComponent();
-
+            MainViewModel x = DataContext as MainViewModel;
+            //ExcelRead();
         }
 
     }

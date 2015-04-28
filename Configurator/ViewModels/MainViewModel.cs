@@ -2,6 +2,7 @@
 using System.Text;
 using System.Windows.Input;
 using Configurator.Waut.Model.PlantConfiguration;
+using Configurator.Waut.Servers;
 using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Windows;
@@ -24,6 +25,8 @@ namespace Configurator.ViewModels.MainViewModel
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
+            
+
             if (execute == null)
             {
                 throw new ArgumentNullException("execute");
@@ -61,6 +64,8 @@ namespace Configurator.ViewModels.MainViewModel
         public void Execute(object parameter)
         {
             this.execute(parameter);
+            
+            //ExcelRead();
         }
 
         public void OnCanExecuteChanged()
@@ -87,6 +92,7 @@ namespace Configurator.ViewModels.MainViewModel
     public class MainViewModel
     {
         private ICommand hiButtonCommand;
+        private ICommand readDataCommand;
 
         private ICommand toggleExecuteCommand { get; set; }
 
@@ -130,6 +136,20 @@ namespace Configurator.ViewModels.MainViewModel
             }
         }
 
+        public ICommand ReadDataCommand
+        {
+            
+            get
+            {
+                return readDataCommand;           
+            }
+            set
+            {
+                readDataCommand = value;
+                Console.WriteLine("Hello Model");
+            }
+        }
+
         public ICommand HiButtonCommand
         {
             get
@@ -146,6 +166,7 @@ namespace Configurator.ViewModels.MainViewModel
         {
             HiButtonCommand = new RelayCommand(ShowMessage, param => this.canExecute);
             toggleExecuteCommand = new RelayCommand(ChangeCanExecute);
+            readDataCommand = new RelayCommand(ChangeCanExecute);
             
         }
 
