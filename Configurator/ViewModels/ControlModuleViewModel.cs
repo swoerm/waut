@@ -16,7 +16,7 @@ namespace Waut.Configurator.ViewModels
 
             ControlModuleService service = new ControlModuleService();
 
-            return service.GetControlModules("sdf sdf sdf");
+            return service.GetControlModules("");
         }
 
     }
