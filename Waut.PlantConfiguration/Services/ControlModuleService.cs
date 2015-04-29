@@ -29,10 +29,10 @@ namespace Waut.PlantConfiguration.Services
             List<ControlModule> list = new List<ControlModule>();
 
 
-
-            ControlModule cm = new ControlModule();
-            cm.Description = "af as asd as ";
             ExcelRead();
+            ControlModule cm = new ControlModule();
+            cm.Description = ExcelRead();
+            
 
 
 
@@ -43,12 +43,14 @@ namespace Waut.PlantConfiguration.Services
 
             return list;
         }
-
-        public static void/*string[]*/ ExcelRead()
+        
+        public static string ExcelRead()
         {
-            string[] arr = { "wort inlet holding vessel", "121", "Type", "Unit", "Format", "Krones", "Project", "1", "2", "3", "4" };
-
-            string con = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\snel\Source\Repos\NewRepo\Waut.PlantConfiguration\Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls;Extended Properties='Excel 8.0;HDR=Yes;'";
+            Console.WriteLine("hefsksljdz");
+            string woord = "hello";
+            //string[] arr = { "wort inlet holding vessel", "121", "Type", "Unit", "Format", "Krones", "Project", "1", "2", "3", "4" };
+            //var x;
+            string con = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=C:\Users\snel\Desktop\PLC1.xls;Extended Properties='Excel 8.0;HDR=Yes;'";
             using (OleDbConnection connection = new OleDbConnection(con))
             {
                 connection.Open();
@@ -61,10 +63,10 @@ namespace Waut.PlantConfiguration.Services
                         var row1Col1 = dr[1];
                         Console.WriteLine(row1Col0);
                         Console.WriteLine(row1Col1);
-
                     }
                 }
             }
+            return woord;
             // return arr;
         }
     }
