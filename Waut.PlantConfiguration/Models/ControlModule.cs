@@ -30,6 +30,7 @@ namespace Waut.PlantConfiguration.Models
 
         public string ProjectSymbolism { get; set; }
 
+        //nie nodig
         public string Symbol1 { get; set; }
 
         public string Symbol2 { get; set; }
