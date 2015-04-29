@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows.Input;
 using Configurator.Waut.Model.PlantConfiguration;
-using Configurator.Waut.Servers;
+using Configurator.Waut.Services;
 using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Windows;
@@ -166,7 +166,7 @@ namespace Configurator.ViewModels.MainViewModel
         {
             HiButtonCommand = new RelayCommand(ShowMessage, param => this.canExecute);
             toggleExecuteCommand = new RelayCommand(ChangeCanExecute);
-            readDataCommand = new RelayCommand(ChangeCanExecute);
+            readDataCommand = new RelayCommand(GoReadData);
             
         }
 
@@ -177,6 +177,11 @@ namespace Configurator.ViewModels.MainViewModel
 
         public void ChangeCanExecute(object obj)
         {
+            canExecute = !canExecute;
+        }
+        public void GoReadData(object obj)
+        {
+            //ExcelRead();
             canExecute = !canExecute;
         }
         public string ButtonContent

@@ -6,8 +6,12 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Configurator.Waut.Servers
+namespace Configurator.Waut.Services
 {
     public class MainClass
     {
@@ -100,8 +104,27 @@ namespace Configurator.Waut.Servers
                         var row1Col1 = dr[1];
                         Console.WriteLine(row1Col0);
                         Console.WriteLine(row1Col1);
+                       
                     }
                 }
+            }
+        }
+        public void SQLRead()
+        {
+            SqlConnection conn = new SqlConnection("Server=.\\SQLEXPRESS; Database=hello;Integrated Security=true");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT Item1, Item2 FROM [Name1].[Name2]", conn);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine("{1}, {0}", reader.GetString(0), reader.GetString(1));
+            }
+            reader.Close();
+            conn.Close();
+            //Delay exit
+            if (Debugger.IsAttached)
+            {
+                Console.ReadLine();
             }
         }
     }
