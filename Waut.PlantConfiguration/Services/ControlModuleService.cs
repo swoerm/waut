@@ -46,9 +46,12 @@ namespace Waut.PlantConfiguration.Services
 
         public static void/*string[]*/ ExcelRead()
         {
+            Console.WriteLine(Directory.GetCurrentDirectory());
+            
+            //return;
             string[] arr = { "wort inlet holding vessel", "121", "Type", "Unit", "Format", "Krones", "Project", "1", "2", "3", "4" };
-
-            string con = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\snel\Source\Repos\NewRepo\Waut.PlantConfiguration\Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls;Extended Properties='Excel 8.0;HDR=Yes;'";
+            
+            string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\..\..\Waut.PlantConfiguration\Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls;Extended Properties='Excel 8.0;HDR=Yes;'";
             using (OleDbConnection connection = new OleDbConnection(con))
             {
                 connection.Open();
