@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Configurator
+namespace Waut.Configurator
 {
     /// <summary>
     /// Interaction logic for App.xaml

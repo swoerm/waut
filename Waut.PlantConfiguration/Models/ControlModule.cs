@@ -7,10 +7,15 @@ using System.Data;
 using System.IO;
 
 
-namespace Configurator.Waut.Model.PlantConfiguration
+namespace Waut.PlantConfiguration.Models
 {
-    public class Controlmodule
+    public class ControlModule
     {
+        public ControlModule()
+        {
+
+        }
+        
         public string Name { get; set; }
     }
 
