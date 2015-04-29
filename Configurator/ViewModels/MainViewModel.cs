@@ -1,17 +1,15 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
-using Configurator.Waut.Model.PlantConfiguration;
-using Configurator.Waut.Servers;
 using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Windows;
 
-namespace Configurator.ViewModels.MainViewModel
+namespace Waut.Configurator.ViewModels.MainViewModel
 {
     public class RelayCommand : ICommand
     {
-
+      
         private Action<object> execute;
 
         private Predicate<object> canExecute;
@@ -185,6 +183,8 @@ namespace Configurator.ViewModels.MainViewModel
             {
                 return "Click Me";
             }
+
+          
         }
     }
 }

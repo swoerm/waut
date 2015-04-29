@@ -1,4 +1,4 @@
-﻿using Configurator.ViewModels.MainViewModel;
+﻿using Waut.Configurator.ViewModels.MainViewModel;
 using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -13,10 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Configurator.Waut.Model.PlantConfiguration;
-using Configurator.Waut.Servers;
 
-namespace Configurator.Views
+
+namespace Waut.Configurator.Views
 {
     /// <summary>
     /// Interaction logic for MainView.xaml
