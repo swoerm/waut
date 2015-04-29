@@ -43,6 +43,7 @@
     <Compile Include="Models\ControlModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ControlModuleService.cs" />
+    <Compile Include="Services\IControlModuleService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls" />

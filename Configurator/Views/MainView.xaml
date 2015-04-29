@@ -1,16 +1,19 @@
 ﻿<Window x:Class="Waut.Configurator.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:local="clr-namespace:Waut.Configurator.ViewModels.MainViewModel"
+        xmlns:local="clr-namespace:Waut.Configurator.ViewModels"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title ="MainView" Height="500" Width="500">
+        xmlns:views="clr-namespace:Waut.Configurator.Views"
+        Title ="MainView" Height="500" Width="500"
+        >
 
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
     
     <Grid>
+        
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <DataGrid Name="CMGrid" Width="159"></DataGrid>
+            
             <Button Grid.Row="0" 
              Content="{Binding HiButtonContent}"
              Command="{Binding HiButtonCommand}" 
@@ -26,7 +29,7 @@
              Content="ReadData"
              Command="{Binding ReadDataCommand}"  
              Width="100" Height="100"  />
-
+            <views:ControlModuleView></views:ControlModuleView>
         </StackPanel>
     </Grid>    
 </Window>

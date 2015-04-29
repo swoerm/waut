@@ -16,7 +16,27 @@ namespace Waut.PlantConfiguration.Models
 
         }
         
-        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public int Number { get; set; }
+
+        public string Type { get; set; }
+
+        public string UoM { get; set; }
+
+        public string Format { get; set; }
+
+        public string KronesSymbolism { get; set; }
+
+        public string ProjectSymbolism { get; set; }
+
+        public string Symbol1 { get; set; }
+
+        public string Symbol2 { get; set; }
+
+        public string Symbol3 { get; set; }
+
+        public string Symbol4 { get; set; }
     }
 
 }

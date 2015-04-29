@@ -5,7 +5,7 @@ using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Windows;
 
-namespace Waut.Configurator.ViewModels.MainViewModel
+namespace Waut.Configurator.ViewModels
 {
     public class RelayCommand : ICommand
     {

@@ -1,6 +1,4 @@
-﻿using Waut.Configurator.ViewModels;
-using Microsoft.Practices.Prism.Mvvm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,22 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Waut.Configurator.ViewModels;
 
 namespace Waut.Configurator.Views
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for ControlModuleView.xaml
     /// </summary>
-    public partial class MainView : Window, IView
+    public partial class ControlModuleView : UserControl
     {
-        public MainView()
+        public ControlModuleView()
         {
             InitializeComponent();
-            MainViewModel x = DataContext as MainViewModel;
-            //ExcelRead();
-        }
+            ControlModuleViewModel x = DataContext as ControlModuleViewModel;
 
+            CMGrid.ItemsSource = x.GetControlModules();
+        }
     }
 }
