@@ -15,6 +15,12 @@ namespace Waut.PlantConfiguration.Models
         {
 
         }
+
+        public bool IsValid()
+        {
+            //return Symbol1
+            return false;
+        }
         
         public string Description { get; set; }
 

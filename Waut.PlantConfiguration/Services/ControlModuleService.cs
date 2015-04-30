@@ -28,17 +28,35 @@ namespace Waut.PlantConfiguration.Services
         {
             List<ControlModule> list = new List<ControlModule>();
 
+            string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\..\..\Waut.PlantConfiguration\Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls;Extended Properties='Excel 8.0;HDR=Yes;'";
+            using (OleDbConnection connection = new OleDbConnection(con))
+            {
+                connection.Open();
+                OleDbCommand command = new OleDbCommand("select * from [BH1PB01$]", connection);
+                using (OleDbDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row1Col0 = dr[0];
+                        var row1Col1 = dr[1];
 
 
-            ControlModule cm = new ControlModule();
-            cm.Description = "af as asd as ";
-            ExcelRead();
+                        ControlModule cm = new ControlModule();
+                        cm.Description = dr[7] as string;
+
+                        if (cm.IsValid())
+                        {
+                             list.Add(cm);
+                        }
+
+                    }
+                }
+            }
 
 
 
 
-
-            list.Add(cm);
+           
 
 
             return list;
