@@ -16,7 +16,7 @@ namespace Waut.Configurator.ViewModels
 
             ControlModuleService service = new ControlModuleService();
 
-            return service.GetControlModules("");
+            return service.GetControlModules(@"C:\Users\snel\Desktop\PLC1.xls");
         }
 
     }

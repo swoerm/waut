@@ -4,6 +4,15 @@ using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Windows;
+using System.IO;
+
+using Microsoft.Win32;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+//using System.Windows.Forms;
+using System.Data;
+using Waut.PlantConfiguration.Services;
 
 namespace Waut.Configurator.ViewModels
 {
@@ -164,7 +173,7 @@ namespace Waut.Configurator.ViewModels
         {
             HiButtonCommand = new RelayCommand(ShowMessage, param => this.canExecute);
             toggleExecuteCommand = new RelayCommand(ChangeCanExecute);
-            readDataCommand = new RelayCommand(ChangeCanExecute);
+            readDataCommand = new RelayCommand(LoadExecute);
             
         }
 
@@ -177,6 +186,36 @@ namespace Waut.Configurator.ViewModels
         {
             canExecute = !canExecute;
         }
+        public void LoadExecute(object obj)
+        {
+            Console.WriteLine("Hello Model");
+
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            dlg.InitialDirectory = "c:\\";
+            dlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            dlg.FilterIndex = 2;
+            dlg.RestoreDirectory = true;
+
+            Nullable<bool> result = dlg.ShowDialog();
+            string name;
+            if (result == true)
+            {
+                try
+                {
+                    name = dlg.FileName;
+                    //GetControlModules(name);
+                    Console.WriteLine(name);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
+            //return name;
+
+        }
+
         public string ButtonContent
         {
             get

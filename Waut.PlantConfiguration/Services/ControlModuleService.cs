@@ -29,6 +29,7 @@ namespace Waut.PlantConfiguration.Services
             Console.WriteLine(Directory.GetCurrentDirectory());
             List<ControlModule> list = new List<ControlModule>();
             ControlModule cm = new ControlModule();
+            Console.WriteLine(FileName);
 
             //***************Sample Entry***************
             string[] arr = { "SAMPLE", "121", "Type", "Unit", "Format", "Krones", "Project", "1", "2", "3", "4" };
@@ -38,7 +39,7 @@ namespace Waut.PlantConfiguration.Services
             list.Add(cm);
             //***************Sample Entry***************
 
-            string con = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=C:\Users\snel\Desktop\PLC1.xls;Extended Properties='Excel 8.0;HDR=Yes;'";
+            string con = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + FileName + ";Extended Properties='Excel 8.0;HDR=Yes;'";
             //string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\..\..\Waut.PlantConfiguration\Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls;Extended Properties='Excel 8.0;HDR=Yes;'";
             string num = "123";
             using (OleDbConnection connection = new OleDbConnection(con))
@@ -68,7 +69,7 @@ namespace Waut.PlantConfiguration.Services
                 Console.WriteLine(excelSheets.Length);
                 //***************Get all worksheet names***************
 
-                for (int k = 0; k < excelSheets.Length; k++)//Loop through all worksheets  excelSheets.Length
+                for (int k = 0; k < 5/*excelSheets.Length*/; k++)//Loop through all worksheets  excelSheets.Length
                 {
                     OleDbCommand command = new OleDbCommand("select * from [" + excelSheets[k] + "]", connection);//[BH1PB01$]
 
@@ -85,11 +86,6 @@ namespace Waut.PlantConfiguration.Services
                                 }
                                 int x = 0;//load integer element from 'arr' into x
 
-                                //***************Sort_Auto***************
-
-
-
-                                //***************Sort_Auto***************
                                 Int32.TryParse(num, out x);
 
                                 if (arr[6] != "" && arr[6] != "DESCRIPTION")
@@ -98,9 +94,9 @@ namespace Waut.PlantConfiguration.Services
 
                                     cm.Description = arr[6];
                                     cm.Number = x;
-                                    cm.Type = arr[8];
+                                    cm.Type = arr[8];//
                                     cm.UoM = arr[1];
-                                    cm.Format = arr[4];
+                                    cm.Format = arr[4];//
                                     cm.Symbol1 = arr[2];
                                     cm.Symbol2 = arr[3];
                                     cm.Symbol3 = arr[4];
@@ -109,17 +105,6 @@ namespace Waut.PlantConfiguration.Services
                                     cm.KronesSymbol = arr[3] + arr[5];//What is the arrangement
                                     cm.Sheet = excelSheets[k];
                                     list.Add(cm);
-                                    /*cm.Description = arr[0];
-                                    cm.Number = x;
-                                    cm.Type = arr[2];
-                                    cm.UoM = arr[3];
-                                    cm.Format = arr[4];
-                                    cm.Symbol1 = arr[5];
-                                    cm.Symbol2 = arr[6];
-                                    cm.Symbol3 = arr[7];
-                                    cm.Symbol4 = arr[8];
-                                    cm.Sheet = excelSheets[k];
-                                    list.Add(cm);*/
                                 }
                             }
                         }
