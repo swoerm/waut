@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\ControlModuleViewModel.cs" />
+    <Compile Include="ViewModels\IeventAggregator.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\ControlModuleView.xaml.cs">
       <DependentUpon>ControlModuleView.xaml</DependentUpon>

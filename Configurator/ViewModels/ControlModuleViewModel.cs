@@ -1,16 +1,18 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Waut.PlantConfiguration.Models;
 using Waut.PlantConfiguration.Services;
+//using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace Waut.Configurator.ViewModels
 {
-    public class ControlModuleViewModel
+    public class ControlModuleViewModel: BindableBase
     {
-
+        //private readonly IEventAggregator eventAggregator;
         public List<ControlModule> GetControlModules()
         {
 

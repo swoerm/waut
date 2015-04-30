@@ -13,6 +13,7 @@ using System.ComponentModel;
 //using System.Windows.Forms;
 using System.Data;
 using Waut.PlantConfiguration.Services;
+using Microsoft.Practices.Prism.Mvvm;
 
 namespace Waut.Configurator.ViewModels
 {
@@ -96,7 +97,7 @@ namespace Waut.Configurator.ViewModels
             return true;
         }
     }
-    public class MainViewModel
+    public class MainViewModel: BindableBase
     {
         private ICommand hiButtonCommand;
         private ICommand readDataCommand;
