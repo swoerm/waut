@@ -84,13 +84,32 @@ namespace Waut.PlantConfiguration.Services
                                     arr[j] = column.ToString();
                                 }
                                 int x = 0;//load integer element from 'arr' into x
+
+                                //***************Sort_Auto***************
+
+
+
+                                //***************Sort_Auto***************
                                 Int32.TryParse(num, out x);
 
                                 if (arr[6] != "" && arr[6] != "DESCRIPTION")
                                 {
                                     cm = new ControlModule();
 
-                                    cm.Description = arr[0];
+                                    cm.Description = arr[6];
+                                    cm.Number = x;
+                                    cm.Type = arr[8];
+                                    cm.UoM = arr[1];
+                                    cm.Format = arr[4];
+                                    cm.Symbol1 = arr[2];
+                                    cm.Symbol2 = arr[3];
+                                    cm.Symbol3 = arr[4];
+                                    cm.Symbol4 = arr[5];
+                                    cm.ProjectSymbol = arr[2] + arr[4];//What is the arrangement
+                                    cm.KronesSymbol = arr[3] + arr[5];//What is the arrangement
+                                    cm.Sheet = excelSheets[k];
+                                    list.Add(cm);
+                                    /*cm.Description = arr[0];
                                     cm.Number = x;
                                     cm.Type = arr[2];
                                     cm.UoM = arr[3];
@@ -100,7 +119,7 @@ namespace Waut.PlantConfiguration.Services
                                     cm.Symbol3 = arr[7];
                                     cm.Symbol4 = arr[8];
                                     cm.Sheet = excelSheets[k];
-                                    list.Add(cm);
+                                    list.Add(cm);*/
                                 }
                             }
                         }
