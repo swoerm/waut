@@ -24,7 +24,7 @@ namespace Waut.PlantConfiguration.Models
         
         public string Description { get; set; }
 
-        public int Number { get; set; }
+        public int Number { get; set; }//int
 
         public string Type { get; set; }
 
@@ -32,18 +32,19 @@ namespace Waut.PlantConfiguration.Models
 
         public string Format { get; set; }
 
-        public string KronesSymbolism { get; set; }
+        public string KronesSymbol { get; set; }
 
-        public string ProjectSymbolism { get; set; }
+        public string ProjectSymbol { get; set; }
 
-        //nie nodig
         public string Symbol1 { get; set; }
 
-        public string Symbol2 { get; set; }
+        public string Symbol2 { get; set; }//int
 
         public string Symbol3 { get; set; }
 
-        public string Symbol4 { get; set; }
+        public string Symbol4 { get; set; }//int
+
+        public string Sheet { get; set; }
     }
 
 }

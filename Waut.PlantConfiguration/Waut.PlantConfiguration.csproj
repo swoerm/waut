@@ -46,6 +46,7 @@
     <Compile Include="Services\IControlModuleService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\PLC1.xls" />
     <None Include="Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
