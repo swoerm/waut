@@ -13,12 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Waut.Configurator.ViewModels;
+using System.Collections;
 
 namespace Waut.Configurator.Views
 {
     /// <summary>
     /// Interaction logic for ControlModuleView.xaml
     /// </summary>
+   
     public partial class ControlModuleView : UserControl
     {
         public ControlModuleView()

@@ -45,6 +45,7 @@ namespace Waut.PlantConfiguration.Models
         public string Symbol4 { get; set; }//int
 
         public string Sheet { get; set; }
+        public string File { get; set; }
     }
 
 }

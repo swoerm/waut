@@ -4,18 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Waut.PlantConfiguration.Models;
+//using Microsoft.Practices.Prism.Mvvm;
 //Excel
 using System.Xml.Serialization;
 using System.IO;
 using System.Data;
 using System.Diagnostics;
 using System.Data.OleDb;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 //Excel
 
 
 namespace Waut.PlantConfiguration.Services
 {
-    public class ControlModuleService : IControlModuleService
+    public class ControlModuleService : IControlModuleService 
     {
         public string FileName { get; set; }
 
@@ -23,19 +26,22 @@ namespace Waut.PlantConfiguration.Services
         {
 
         }
+        //public event NotifyCollectionChangedEventHandler CollectionChanged;
+
 
         public List<ControlModule> GetControlModules(string FileName)
         {
+            Console.WriteLine("Added to list!!");
             Console.WriteLine(Directory.GetCurrentDirectory());
             List<ControlModule> list = new List<ControlModule>();
             ControlModule cm = new ControlModule();
             Console.WriteLine(FileName);
 
             //***************Sample Entry***************
-            string[] arr = { "SAMPLE", "121", "Type", "Unit", "Format", "Krones", "Project", "1", "2", "3", "4" };
+            string[] arr = { "SAMPLE", "121", "Type", "Unit", "Format", "Krones", "Project", "1", "2", "3", "4" ,"PLCWhat","SheetWhat"};
             cm = new ControlModule();
             cm.Description = arr[0];cm.Number = 1234;cm.Type = arr[2];cm.UoM = arr[3];cm.Format = arr[4];cm.KronesSymbol = arr[5];
-            cm.ProjectSymbol = arr[6];cm.Symbol1 = arr[7];cm.Symbol2 = arr[8];cm.Symbol3 = arr[9];cm.Symbol4 = arr[10];
+            cm.ProjectSymbol = arr[6]; cm.Symbol1 = arr[7]; cm.Symbol2 = arr[8]; cm.Symbol3 = arr[9]; cm.Symbol4 = arr[10]; cm.Sheet = arr[11]; cm.File = arr[12];
             list.Add(cm);
             //***************Sample Entry***************
 
@@ -104,6 +110,7 @@ namespace Waut.PlantConfiguration.Services
                                     cm.ProjectSymbol = arr[2] + arr[4];//What is the arrangement
                                     cm.KronesSymbol = arr[3] + arr[5];//What is the arrangement
                                     cm.Sheet = excelSheets[k];
+                                    cm.File = FileName;
                                     list.Add(cm);
                                 }
                             }
@@ -116,7 +123,11 @@ namespace Waut.PlantConfiguration.Services
                 }
             }
             list.Add(cm);
+          
             return list;
         }
+        //#region INotifyCollectionChanged Members
+        //public event NotifyCollectionChangedEventHandler CollectionChanged;
+        //#endregion
     }
 }
