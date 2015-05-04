@@ -2,6 +2,7 @@
 using System.Text;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 using System;
 using System.Windows;
 using System.IO;
