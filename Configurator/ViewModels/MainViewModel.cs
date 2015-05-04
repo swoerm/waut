@@ -13,7 +13,12 @@ using System.Collections;
 using System.ComponentModel;
 //using System.Windows.Forms;
 using System.Data;
+//using Waut.PlantConfiguration.Services.ControlModuleService;
+using Waut.Configurator.ViewModels;
+using Microsoft.Practices.Prism.Mvvm;
+using Waut.PlantConfiguration.Models;
 using Waut.PlantConfiguration.Services;
+using System.Collections.Generic;
 
 namespace Waut.Configurator.ViewModels
 {
@@ -97,11 +102,11 @@ namespace Waut.Configurator.ViewModels
             return true;
         }
     }
-    public class MainViewModel
+    public class MainViewModel : BindableBase, INotifyPropertyChanged
     {
         private ICommand hiButtonCommand;
-        private ICommand readDataCommand;
-
+       // private ICommand readDataCommand;
+        private ICommand loadFileCommand;
         private ICommand toggleExecuteCommand { get; set; }
 
         private bool canExecute = true;
@@ -149,11 +154,11 @@ namespace Waut.Configurator.ViewModels
             
             get
             {
-                return readDataCommand;           
+                return loadFileCommand;           
             }
             set
             {
-                readDataCommand = value;
+                loadFileCommand = value;
                 Console.WriteLine("Hello Model");
             }
         }
@@ -174,7 +179,7 @@ namespace Waut.Configurator.ViewModels
         {
             HiButtonCommand = new RelayCommand(ShowMessage, param => this.canExecute);
             toggleExecuteCommand = new RelayCommand(ChangeCanExecute);
-            readDataCommand = new RelayCommand(LoadExecute);
+            loadFileCommand = new RelayCommand(LoadExecute);
             
         }
 
@@ -187,6 +192,14 @@ namespace Waut.Configurator.ViewModels
         {
             canExecute = !canExecute;
         }
+
+        //public List<ControlModule> GetControlModules()
+        //{
+
+        //    ControlModuleService service = new ControlModuleService();
+
+        //    return service.GetControlModules(@"C:\Users\snel\Desktop\PLC1.xls");
+        //}
         public void LoadExecute(object obj)
         {
             Console.WriteLine("Hello Model");
@@ -205,7 +218,8 @@ namespace Waut.Configurator.ViewModels
                 try
                 {
                     name = dlg.FileName;
-                    //GetControlModules(name);
+                    ControlModuleService service = new ControlModuleService();
+                    service.GetControlModules(name);
                     Console.WriteLine(name);
                 }
                 catch (Exception ex)

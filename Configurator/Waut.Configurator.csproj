@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Distributor">
+      <HintPath>..\packages\Distributor.0.2.6.0\lib\net40\Distributor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Mvvm">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
     </Reference>
@@ -68,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\ControlModuleViewModel.cs" />
+    <Compile Include="ViewModels\IeventAggregator.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\ControlModuleView.xaml.cs">
       <DependentUpon>ControlModuleView.xaml</DependentUpon>

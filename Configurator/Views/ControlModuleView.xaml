@@ -10,5 +10,6 @@
     <UserControl.DataContext>
         <local:ControlModuleViewModel/>
     </UserControl.DataContext>
-    <DataGrid Name="CMGrid" Margin="-500,200,100,10"/>
+    <DataGrid Name="CMGrid" ItemsSource="{Binding ControlModule}" Margin="-500,200,100,10"/>
+
 </UserControl>
