@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Waut.Configurator.ViewModels;
 using System.Collections;
 
+using Waut.PlantConfiguration.Services;
+
 namespace Waut.Configurator.Views
 {
     /// <summary>
@@ -26,9 +28,12 @@ namespace Waut.Configurator.Views
         public ControlModuleView()
         {
             InitializeComponent();
-            ControlModuleViewModel x = DataContext as ControlModuleViewModel;
+           ControlModuleViewModel x = DataContext as ControlModuleViewModel;
+            //ControlModuleService x = DataContext as ControlModuleService;
 
             CMGrid.ItemsSource = x.GetControlModules();
+
+            
         }
     }
 }

@@ -76,8 +76,6 @@ namespace Waut.Configurator.ViewModels
         public void Execute(object parameter)
         {
             this.execute(parameter);
-            
-            //ExcelRead();
         }
 
         public void OnCanExecuteChanged()
@@ -103,9 +101,10 @@ namespace Waut.Configurator.ViewModels
     }
     public class MainViewModel : BindableBase, INotifyPropertyChanged
     {
+        //public ControlModuleViewModel ControlModuleViewModel { get; set; }
+
         private ICommand hiButtonCommand;
-       // private ICommand readDataCommand;
-        private ICommand loadFileCommand;
+        //private ICommand loadFileCommand;
         private ICommand toggleExecuteCommand { get; set; }
 
         private bool canExecute = true;
@@ -148,19 +147,6 @@ namespace Waut.Configurator.ViewModels
             }
         }
 
-        public ICommand ReadDataCommand
-        {
-            
-            get
-            {
-                return loadFileCommand;           
-            }
-            set
-            {
-                loadFileCommand = value;
-                Console.WriteLine("Hello Model");
-            }
-        }
 
         public ICommand HiButtonCommand
         {
@@ -175,11 +161,10 @@ namespace Waut.Configurator.ViewModels
         }
 
         public MainViewModel()
-        {
+        {          
             HiButtonCommand = new RelayCommand(ShowMessage, param => this.canExecute);
             toggleExecuteCommand = new RelayCommand(ChangeCanExecute);
-            loadFileCommand = new RelayCommand(LoadExecute);
-            
+           // loadFileCommand = new RelayCommand(LoadExecute);           
         }
 
         public void ShowMessage(object obj)
@@ -192,52 +177,19 @@ namespace Waut.Configurator.ViewModels
             canExecute = !canExecute;
         }
 
-        //public List<ControlModule> GetControlModules()
+
+        //public void LoadExecute(object obj)
         //{
-
-        //    ControlModuleService service = new ControlModuleService();
-
-        //    return service.GetControlModules(@"C:\Users\snel\Desktop\PLC1.xls");
+        //    this.ControlModuleViewModel = new ControlModuleViewModel();
+        //    //return name;
         //}
-        public void LoadExecute(object obj)
-        {
-            Console.WriteLine("Hello Model");
-
-            OpenFileDialog dlg = new OpenFileDialog();
-
-            dlg.InitialDirectory = "c:\\";
-            dlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            dlg.FilterIndex = 2;
-            dlg.RestoreDirectory = true;
-
-            Nullable<bool> result = dlg.ShowDialog();
-            string name;
-            if (result == true)
-            {
-                try
-                {
-                    name = dlg.FileName;
-                    ControlModuleService service = new ControlModuleService();
-                    service.GetControlModules(name);
-                    Console.WriteLine(name);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-                }
-            }
-            //return name;
-
-        }
 
         public string ButtonContent
         {
             get
             {
                 return "Click Me";
-            }
-
-          
+            }       
         }
     }
 }

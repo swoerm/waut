@@ -22,12 +22,7 @@
              Content="Toggle Can Click" 
              Command="{Binding ToggleExecuteCommand}"  
              Width="100" Height="100" Margin="0,10,0,349"/>
-            <Button 
-             Content="Load Data"
-             Command="{Binding ReadDataCommand}"  
-             Width="100" Height="100"  Margin="0,10,0,349"  />
             <views:ControlModuleView/>
         </StackPanel>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="650,66,0,0" TextWrapping="Wrap" Text="LoadFile" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
