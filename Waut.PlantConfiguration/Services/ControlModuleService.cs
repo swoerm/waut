@@ -12,13 +12,13 @@ using System.Data;
 using System.Diagnostics;
 using System.Data.OleDb;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+//using System.Collections.Specialized;
 
 //Excel  
 
 namespace Waut.PlantConfiguration.Services
 {
-    public class ControlModuleService : ObservableCollection<ControlModule>, IControlModuleService
+    public class ControlModuleService // : ObservableCollection<ControlModule>, IControlModuleService
     {
         public string FileName { get; set; }
 
@@ -26,7 +26,7 @@ namespace Waut.PlantConfiguration.Services
         {
 
         }
-        //public event NotifyCollectionChangedEventHandler CollectionChanged;
+       
  
         public List<ControlModule> GetControlModules(string FileName)
         {
@@ -111,6 +111,7 @@ namespace Waut.PlantConfiguration.Services
                                     cm.Sheet = excelSheets[k];
                                     cm.File = FileName;
                                     list.Add(cm);
+                                    Console.WriteLine(cm.Description);
                                 }
                             }
                         }
@@ -123,31 +124,31 @@ namespace Waut.PlantConfiguration.Services
             }
             list.Add(cm);
 
-            SaveControlModules(list);
+            //SaveControlModules(list);
             return list;
         }
 
 
-        public void SaveControlModules(List<ControlModule> passList)
-        {
-            Console.WriteLine("GotMe");//Display 
-            string connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source= @C:\\Users\\snel\\Desktop\\myDatabase.mdb";
+        //public void SaveControlModules(List<ControlModule> passList)
+        //{
+        //    Console.WriteLine("GotMe");//Display 
+        //    string connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source= @C:\\Users\\snel\\Desktop\\myDatabase.mdb";
 
-            string query = "SELECT * FROM MyTable";
+        //    string query = "SELECT * FROM MyTable";
 
 
-            OleDbDataAdapter dAdapter = new OleDbDataAdapter(query, connString);
-            OleDbCommandBuilder cBuilder = new OleDbCommandBuilder(dAdapter);
+        //    OleDbDataAdapter dAdapter = new OleDbDataAdapter(query, connString);
+        //    OleDbCommandBuilder cBuilder = new OleDbCommandBuilder(dAdapter);
 
-            DataTable dTable = new DataTable();
-            dAdapter.Fill(dTable);
+        //    DataTable dTable = new DataTable();
+        //    dAdapter.Fill(dTable);
 
-            Console.WriteLine(connString);
-        }
+        //    Console.WriteLine(connString);
+        //}
 
-        private void ConnectToDatabase()
-        {
-            //DBConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source= @C:\\Users\\snel\\Desktop\\myDatabase.mdb";
-        }
+    //    private void ConnectToDatabase()
+    //    {
+    //        //DBConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source= @C:\\Users\\snel\\Desktop\\myDatabase.mdb";
+    //    }
     }
 }
