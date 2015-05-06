@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.IO;
+using System.Collections.ObjectModel;
+
 
 
 namespace Waut.PlantConfiguration.Models
 {
-    public class ControlModule
+    public class ControlModule : ObservableCollection<ControlModule>
     {
         public ControlModule()
         {

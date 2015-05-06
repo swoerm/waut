@@ -177,14 +177,11 @@ namespace Waut.Configurator.ViewModels
         {
             canExecute = !canExecute;
         }
-
-
         //public void LoadExecute(object obj)
         //{
         //    this.ControlModuleViewModel = new ControlModuleViewModel();
         //    //return name;
         //}
-
         public string ButtonContent
         {
             get

@@ -19,21 +19,16 @@ using Waut.PlantConfiguration.Services;
 
 namespace Waut.Configurator.Views
 {
-    /// <summary>
-    /// Interaction logic for ControlModuleView.xaml
-    /// </summary>
-   
     public partial class ControlModuleView : UserControl
     {
         public ControlModuleView()
         {
             InitializeComponent();
-           ControlModuleViewModel x = DataContext as ControlModuleViewModel;
-            //ControlModuleService x = DataContext as ControlModuleService;
 
-            CMGrid.ItemsSource = x.GetControlModules();
+          // ControlModuleViewModel x = DataContext as ControlModuleViewModel;
+           // CMGrid.ItemsSource = x.GetControlModules();
 
-            
+            //this.DataContext = new ControlModuleViewModel();           
         }
     }
 }

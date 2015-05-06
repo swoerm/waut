@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Waut.PlantConfiguration.Models;
-//using Microsoft.Practices.Prism.Mvvm;
+//ing Microsoft.Practices.Prism.Mvvm;
 //Excel
 using System.Xml.Serialization;
 using System.IO;
@@ -13,12 +13,12 @@ using System.Diagnostics;
 using System.Data.OleDb;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-//Excel
 
+//Excel  
 
 namespace Waut.PlantConfiguration.Services
 {
-    public class ControlModuleService : IControlModuleService 
+    public class ControlModuleService : ObservableCollection<ControlModule>, IControlModuleService
     {
         public string FileName { get; set; }
 
@@ -27,8 +27,7 @@ namespace Waut.PlantConfiguration.Services
 
         }
         //public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-
+ 
         public List<ControlModule> GetControlModules(string FileName)
         {
             Console.WriteLine("Added to list!!");
@@ -123,11 +122,32 @@ namespace Waut.PlantConfiguration.Services
                 }
             }
             list.Add(cm);
-          
+
+            SaveControlModules(list);
             return list;
         }
-        //#region INotifyCollectionChanged Members
-        //public event NotifyCollectionChangedEventHandler CollectionChanged;
-        //#endregion
+
+
+        public void SaveControlModules(List<ControlModule> passList)
+        {
+            Console.WriteLine("GotMe");//Display 
+            string connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source= @C:\\Users\\snel\\Desktop\\myDatabase.mdb";
+
+            string query = "SELECT * FROM MyTable";
+
+
+            OleDbDataAdapter dAdapter = new OleDbDataAdapter(query, connString);
+            OleDbCommandBuilder cBuilder = new OleDbCommandBuilder(dAdapter);
+
+            DataTable dTable = new DataTable();
+            dAdapter.Fill(dTable);
+
+            Console.WriteLine(connString);
+        }
+
+        private void ConnectToDatabase()
+        {
+            //DBConnection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source= @C:\\Users\\snel\\Desktop\\myDatabase.mdb";
+        }
     }
 }
