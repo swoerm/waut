@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input; 
+using System.Windows.Input;
 using Waut.PlantConfiguration.Models;
 using Waut.PlantConfiguration.Services;
 //using Waut.Configurator.ViewModels;
@@ -19,21 +19,17 @@ using System.Windows.Data;
 using System.Runtime.CompilerServices;
 
 
-
 namespace Waut.Configurator.ViewModels
 {
-    public class ControlModuleViewModel : BindableBase, INotifyPropertyChanged
+    public class ControlModuleViewModel : BindableBase, INotifyPropertyChanged//, ObservableCollection<ControlModule>
     {
 
         public ControlModuleViewModel(/*ObservableCollection<ControlModuleService> service*/)
         {
             importFileCommand = new RelayCommand(ImportX);
-            bindToList = new RelayCommand(ImportX);
         }
-
-        public string Name;
         public void ImportX(object obj)
-        {          
+        {
             Console.WriteLine("Hello Model");
 
             OpenFileDialog dlg = new OpenFileDialog();
@@ -44,16 +40,17 @@ namespace Waut.Configurator.ViewModels
             dlg.RestoreDirectory = true;
 
             Nullable<bool> result = dlg.ShowDialog();
-            
+            string name;
             if (result == true)
             {
                 try
                 {
-                    Name = dlg.FileName;
+                    name = dlg.FileName;
                     ControlModuleService service = new ControlModuleService(); //Add binding here
-                    service.GetControlModules(Name);
+                    service.GetControlModules(name);
+                    // this.service.cm = 
 
-                    Console.WriteLine(Name);
+                    Console.WriteLine(name);
                 }
                 catch (Exception ex)
                 {
@@ -63,18 +60,6 @@ namespace Waut.Configurator.ViewModels
         }
 
         private ICommand importFileCommand;
-        private ICommand bindToList;
-        
-        private ICommand BindToList
-        {
-            get
-            {
-                return bindToList;
-
-            }
-            set
-            { }
-        }
         public ICommand ImportFileCommand
         {
             get
@@ -82,7 +67,7 @@ namespace Waut.Configurator.ViewModels
                 return importFileCommand;
             }
             set
-            {}
+            { }
         }
         public List<ControlModule> GetControlModules()
         {
@@ -94,30 +79,34 @@ namespace Waut.Configurator.ViewModels
             return service.GetControlModules(@"C:\Users\snel\Desktop\PLC1.xls");
         }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //public string name;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public string name;
 
-        //public string Name
-        //{
-        //    get { return name; }
-        //    set
-        //    {
+        public string Name
+        {
+            get { return name; }
+            set
+            {
 
-        //        if (value != this.name)
-        //        {
-        //            name = value;
-        //            NotifyPropertyChanged("Name");
-        //        }
-        //    }
-        //}
-        //private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
+                if (value != this.name)
+                {
+                    name = value;
+                    NotifyPropertyChanged("Name");
+                }
+            }
+        }
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
+        // public ICollectionView service { get; set; }
+
+
+        //**********************
         private ICommand loadFileCommand;
         public ICommand ReadDataCommand
         {
@@ -132,6 +121,5 @@ namespace Waut.Configurator.ViewModels
                 Console.WriteLine("Hello Model");
             }
         }
-       
     }
 }

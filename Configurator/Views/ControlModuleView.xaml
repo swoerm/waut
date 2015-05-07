@@ -7,19 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="800">
 
-    <UserControl.DataContext>
-        <local:ControlModuleViewModel/>
-    </UserControl.DataContext>
+    <UserControl.Resources>
+        <local:ControlModuleViewModel x:Key="cmvm" />
+    </UserControl.Resources>
 
-    <Grid>
-         
-        <DataGrid Name="CMGrid" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="300" DataContext="{Binding cm}"/>
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Mode=OneWay, Source={StaticResource cmvm}}">
+        <DataGrid Name="CMGrid" Margin="-500,200,100,10" DataContext="{Binding ImportFileCommand}"/>
 
         <Button 
              Content="Import File" 
              Command="{Binding ImportFileCommand}"  
              Width="100" Height="100" Margin="0,10,0,349"/>
-
 
     </Grid>
 

@@ -25,10 +25,10 @@ namespace Waut.Configurator.Views
         {
             InitializeComponent();
 
-          ControlModuleViewModel x = DataContext as ControlModuleViewModel;
-            CMGrid.ItemsSource = x.GetControlModules();
+          //ControlModuleViewModel x = DataContext as ControlModuleViewModel;
+            //CMGrid.ItemsSource = x.GetControlModules();
 
-            this.DataContext = new ControlModuleViewModel();           
+            //this.DataContext = new ControlModuleViewModel();           
         }
     }
 }
