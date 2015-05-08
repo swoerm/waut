@@ -7,17 +7,39 @@
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="800">
 
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <local:ControlModuleViewModel x:Key="cmvm" />
-    </UserControl.Resources>
+    </UserControl.Resources>-->
 
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Mode=OneWay, Source={StaticResource cmvm}}">
-        <DataGrid Name="CMGrid" Margin="-500,200,100,10" DataContext="{Binding ImportFileCommand}"/>
+    <UserControl.DataContext>
+        <local:ControlModuleViewModel/>
+    </UserControl.DataContext>
+    <!--<DataGrid Name="CMGrid" Margin="-500,200,100,10"/>DataContext="{Binding ImportFileCommand}"DataContext="{Binding Mode=OneWay, Source={StaticResource cmvm}}"-->
 
-        <Button 
-             Content="Import File" 
-             Command="{Binding ImportFileCommand}"  
-             Width="100" Height="100" Margin="0,10,0,349"/>
+    <Grid x:Name="LayoutRoot" Margin="0,87,0,0" Background="Snow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="202*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Name="CMGrid" Grid.Row="1" Margin="0,0,0,10" ItemsSource="{Binding}"/>
+
+        <Button Content="Import File" 
+                Command="{Binding ImportFileCommand}" 
+                Grid.Row="0"
+                Height="60"
+                Width="100"/>
+        
+        <Button Name="delete" Content="Delete" 
+                Grid.Row="0"
+                Width="100" Height="60" 
+                Background="Silver" 
+                Click="OnClickDelete" RenderTransformOrigin="-1.09,0.675" Margin="482,0,225,0" IsEnabled="False"/>
+
+        <Button Name="edit" Content="Edit" 
+                Grid.Row="0"
+                Width="100" Height="60" 
+                Background="Silver" 
+                Click="OnClickEdit" Margin="225,0,485,0" IsEnabled="False"/>
 
     </Grid>
 

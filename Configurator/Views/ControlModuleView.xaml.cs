@@ -25,10 +25,26 @@ namespace Waut.Configurator.Views
         {
             InitializeComponent();
 
-          //ControlModuleViewModel x = DataContext as ControlModuleViewModel;
-            //CMGrid.ItemsSource = x.GetControlModules();
+            ControlModuleViewModel x = DataContext as ControlModuleViewModel;
+            this.CMGrid.ItemsSource = x.GetControlModules();
 
-            //this.DataContext = new ControlModuleViewModel();           
+            this.DataContext = new ControlModuleViewModel();
+            this.CMGrid.DataContext = x.GetControlModules();
+
+            //this.CMGrid.ItemsSource = GetControlModules();
+           // this.CMGrid.DataContext = GetControlModules;
         }
+        #region ViewComponents
+        void OnClickDelete(object sender, RoutedEventArgs e)
+        {
+            //delete.Background = Brushes.LightBlue;
+            MessageBox.Show("Inactive");
+        }
+        void OnClickEdit(object sender, RoutedEventArgs e)
+        {
+            //edit.Background = Brushes.LightBlue;
+            MessageBox.Show("Inactive");
+        }
+        #endregion ViewComponents
     }
 }
