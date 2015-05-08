@@ -21,7 +21,7 @@
             <RowDefinition Height="60*"/>
             <RowDefinition Height="202*"/>
         </Grid.RowDefinitions>
-        <DataGrid Name="CMGrid" Grid.Row="1" Margin="0,0,0,10" ItemsSource="{Binding}"/>
+        <DataGrid Name="CMGrid" Grid.Row="1" Margin="0,0,0,10" ItemsSource="{Binding ControlModules}"/>
 
         <Button Content="Import File" 
                 Command="{Binding ImportFileCommand}" 
