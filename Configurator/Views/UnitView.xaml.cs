@@ -19,13 +19,13 @@ using Waut.PlantConfiguration.Services;
 
 namespace Waut.Configurator.Views
 {
-    public partial class ControlModuleView : UserControl
+    public partial class UnitView : UserControl
     {
-        public ControlModuleView()
+        public UnitView()
         {
             InitializeComponent();
 
-            ControlModuleViewModel x = DataContext as ControlModuleViewModel;
+            UnitViewModel x = DataContext as UnitViewModel;
         }
         #region ViewComponents
         void OnClickDelete(object sender, RoutedEventArgs e)

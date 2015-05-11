@@ -15,14 +15,21 @@
         <Button 
             	Content="Toggle Can Click" 
             	Command="{Binding ToggleExecuteCommand}"  
-            	Width="100" Height="60" Margin="25,25,1166,484"/>
+            	Width="100" Height="60"
+                HorizontalAlignment="Left" 
+                Margin="20,25,0,0" 
+                VerticalAlignment="Top"/>
         <Button 
             	Content="{Binding HiButtonContent}"
             	Command="{Binding HiButtonCommand}" 
             	CommandParameter="Hai" 
-            	Width="100" Height="60"  Margin="155,25,1037,484"  />
+            	Width="100" Height="60"
+                HorizontalAlignment="Left" 
+                Margin="150,25,0,0" 
+                VerticalAlignment="Top"/>
 
-        <views:ControlModuleView/>
+        <!--<views:ControlModuleView/>-->
+        <views:UnitView/>
         <Button Name="ManageData" Content="Manage Data" 
                 HorizontalAlignment="Left" 
                 Margin="280,25,0,0" 

@@ -1,30 +1,13 @@
-﻿using System.Diagnostics;
-using System.Text;
-using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.PubSubEvents;
+﻿using System.Windows.Input;
 using System;
 using System.Windows;
-using System.IO;
-
-using Microsoft.Win32;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
-//using System.Windows.Forms;
-using System.Data;
-//using Waut.PlantConfiguration.Services.ControlModuleService;
-using Waut.Configurator.ViewModels;
 using Microsoft.Practices.Prism.Mvvm;
-using Waut.PlantConfiguration.Models;
-using Waut.PlantConfiguration.Services;
-using System.Collections.Generic;
 
 namespace Waut.Configurator.ViewModels
 {
     public class RelayCommand : ICommand
     {
-      
         private Action<object> execute;
 
         private Predicate<object> canExecute;
@@ -102,12 +85,8 @@ namespace Waut.Configurator.ViewModels
     }
     public class MainViewModel : BindableBase, INotifyPropertyChanged
     {
-        //public ControlModuleViewModel ControlModuleViewModel { get; set; }
-
         private ICommand hiButtonCommand;
-        //private ICommand loadFileCommand;
         private ICommand toggleExecuteCommand { get; set; }
-
         private bool canExecute = true;
 
         public string HiButtonContent
@@ -164,8 +143,7 @@ namespace Waut.Configurator.ViewModels
         public MainViewModel()
         {          
             HiButtonCommand = new RelayCommand(ShowMessage, param => this.canExecute);
-            toggleExecuteCommand = new RelayCommand(ChangeCanExecute);
-           // loadFileCommand = new RelayCommand(LoadExecute);           
+            toggleExecuteCommand = new RelayCommand(ChangeCanExecute);        
         }
 
         public void ShowMessage(object obj)
@@ -177,11 +155,6 @@ namespace Waut.Configurator.ViewModels
         {
             canExecute = !canExecute;
         }
-        //public void LoadExecute(object obj)
-        //{
-        //    this.ControlModuleViewModel = new ControlModuleViewModel();
-        //    //return name;
-        //}
         public string ButtonContent
         {
             get
