@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Waut.Configurator.ViewModels;
 using System.Collections;
+using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Waut.Configurator.Views
 {
@@ -26,9 +28,28 @@ namespace Waut.Configurator.Views
         public ControlModuleView()
         {
             InitializeComponent();
-            ControlModuleViewModel x = DataContext as ControlModuleViewModel;
-
-            CMGrid.ItemsSource = x.GetControlModules();
+            
         }
+
+        /// <summary>
+        /// Sets the ViewModel.
+        /// </summary>
+        /// <remarks>
+        /// This set-only property is annotated with the <see cref="ImportAttribute"/> so it is injected by MEF with
+        /// the appropriate view model.
+        /// </remarks>
+        [Import]
+        [SuppressMessage("Microsoft.Design", "CA1044:PropertiesShouldNotBeWriteOnly", Justification = "Needs to be a property to be composed by MEF")]
+        ControlModuleViewModel ViewModel
+        {
+            set
+            {
+                this.DataContext = value;
+
+                ControlModuleViewModel x = DataContext as ControlModuleViewModel;
+
+                CMGrid.ItemsSource = x.GetControlModules();
+            }
+        } 
     }
 }

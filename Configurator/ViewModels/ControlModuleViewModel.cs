@@ -16,14 +16,29 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Data;
 using System.Runtime.CompilerServices;
+using System.ComponentModel.Composition;
+using Microsoft.Practices.Prism.PubSubEvents;
+
 
 namespace Waut.Configurator.ViewModels
 {
-    public class ControlModuleViewModel : INotifyPropertyChanged//ObservableCollection<ControlModuleService>
+    [Export]
+    public class ControlModuleViewModel : INotifyPropertyChanged
     {
         
         public event PropertyChangedEventHandler PropertyChanged;
         public string name;
+
+        [Import]
+        private readonly IEventAggregator eventAggregator;
+
+
+        public ControlModuleViewModel()
+        {
+            loadFileCommand = new RelayCommand(LoadExecute);
+
+
+        }
 
         public string Name
         {
@@ -55,7 +70,10 @@ namespace Waut.Configurator.ViewModels
 
             ControlModuleService service = new ControlModuleService();
 
-            return service.GetControlModules(@"C:\Users\snel\Desktop\PLC1.xls");
+            //return service.GetControlModules(@"C:\Users\snel\Desktop\PLC1.xls");
+            eventAggregator.ToString();
+            return null;
+           
         }
         //**********************
         private ICommand loadFileCommand;
@@ -72,13 +90,9 @@ namespace Waut.Configurator.ViewModels
                 Console.WriteLine("Hello Model");
             }
         }
-        public ControlModuleViewModel(/*ObservableCollection<ControlModuleService> service*/)
-        {
-            loadFileCommand = new RelayCommand(LoadExecute);
-            //this.ReadDataCommand = new ControlModuleService();
-           // service = new ListCollectionView(service);
-            
-        }
+
+
+        
         public void LoadExecute(object obj)
         {
             //Console.WriteLine(name);
