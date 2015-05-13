@@ -18,7 +18,7 @@
             <RowDefinition Height="202*"/>
         </Grid.RowDefinitions>
         <DataGrid Name="CMGrid" 
-                  ItemsSource="{Binding ControlModules}"
+                  ItemsSource="{Binding Units}"
                   Grid.Row="1" 
                   Margin="0,0,0,10" />
 

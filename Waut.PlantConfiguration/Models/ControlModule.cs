@@ -19,8 +19,24 @@ namespace Waut.PlantConfiguration.Models
         public string Type { get; set; }
         public string UoM { get; set; }
         public string Format { get; set; }
-        public string KronesSymbol { get; set; }
-        public string ProjectSymbol { get; set; }
+
+        public string KronesSymbol 
+        { 
+            get
+            {
+                var s = Symbol1 + Symbol2 + Symbol3 + Symbol4;
+                return s;
+            }
+        }
+
+        public string ProjectSymbol
+        {
+            get
+            {
+                var s = Symbol1 + Symbol2 + Symbol3 + Symbol4;
+                return s;
+            }
+        }
         public string Symbol1 { get; set; }
         public string Symbol2 { get; set; }//int
         public string Symbol3 { get; set; }
