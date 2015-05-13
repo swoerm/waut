@@ -51,9 +51,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.Prism.PubSubEvents">
-      <HintPath>..\packages\Prism.PubSubEvents.1.1.2\lib\portable-sl5+windowsphone8+windows8+net40+wpa81\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -87,7 +84,6 @@
     <None Include="Data\PLC3.xls" />
     <None Include="Data\PLC5.xls" />
     <None Include="Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\myDatabase.accdb">

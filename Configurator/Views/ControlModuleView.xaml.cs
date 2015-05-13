@@ -14,17 +14,22 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Waut.Configurator.ViewModels;
 using System.Collections;
+using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 
 using Waut.PlantConfiguration.Services;
 
 namespace Waut.Configurator.Views
 {
+    /// <summary>
+    /// Interaction logic for ControlModuleView.xaml
+    /// </summary>
+   
     public partial class ControlModuleView : UserControl
     {
         public ControlModuleView()
         {
             InitializeComponent();
-
             ControlModuleViewModel x = DataContext as ControlModuleViewModel;
         }
         #region ViewComponents
@@ -40,4 +45,5 @@ namespace Waut.Configurator.Views
         }
         #endregion ViewComponents
     }
+}
 }
