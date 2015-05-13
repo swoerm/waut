@@ -27,7 +27,12 @@ namespace Waut.Configurator.Views
             InitializeComponent();
             MainViewModel x = DataContext as MainViewModel;
             //ExcelRead();
-        }
 
+        }
+        void OnClick1(object sender, RoutedEventArgs e)
+        {
+            ManageData.Background = Brushes.LightBlue;
+            MessageBox.Show("Call Data");
+        }
     }
 }

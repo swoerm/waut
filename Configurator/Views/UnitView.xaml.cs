@@ -14,23 +14,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Waut.Configurator.ViewModels;
 using System.Collections;
-using System.ComponentModel.Composition;
-using System.Diagnostics.CodeAnalysis;
 
 using Waut.PlantConfiguration.Services;
 
 namespace Waut.Configurator.Views
 {
-    /// <summary>
-    /// Interaction logic for ControlModuleView.xaml
-    /// </summary>
-   
-    public partial class ControlModuleView : UserControl
+    public partial class UnitView : UserControl
     {
-        public ControlModuleView()
+        public UnitView()
         {
             InitializeComponent();
-            ControlModuleViewModel x = DataContext as ControlModuleViewModel;
+
+            UnitViewModel x = DataContext as UnitViewModel;
         }
         #region ViewComponents
         void OnClickDelete(object sender, RoutedEventArgs e)
@@ -45,5 +40,4 @@ namespace Waut.Configurator.Views
         }
         #endregion ViewComponents
     }
-}
 }

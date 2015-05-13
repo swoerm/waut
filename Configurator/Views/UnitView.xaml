@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Waut.Configurator.Views.ControlModuleView"
+﻿<UserControl x:Class="Waut.Configurator.Views.UnitView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,14 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="800">
 
-    <!--<UserControl.Resources>
-        <local:ControlModuleViewModel x:Key="cmvm" />
-    </UserControl.Resources>-->
-
     <UserControl.DataContext>
-        <local:ControlModuleViewModel/>
+        <local:UnitViewModel/>
     </UserControl.DataContext>
-    <!--<DataGrid Name="CMGrid" Margin="-500,200,100,10"/>DataContext="{Binding ImportFileCommand}"DataContext="{Binding Mode=OneWay, Source={StaticResource cmvm}}"-->
+    
 
     <Grid x:Name="LayoutRoot" Margin="0,87,0,0" Background="Snow">
         <Grid.RowDefinitions>
@@ -22,21 +18,15 @@
             <RowDefinition Height="202*"/>
         </Grid.RowDefinitions>
         <DataGrid Name="CMGrid" 
-                  ItemsSource="{Binding ControlModules}"
+                  ItemsSource="{Binding Units}"
                   Grid.Row="1" 
                   Margin="0,0,0,10" />
 
-        <Button Content="Import File" 
-                Command="{Binding ImportFileCommand}" 
+        <Button Content="Import Database" 
+                Command="{Binding ImportDatabaseCommand}" 
                 Grid.Row="0"
                 Height="60"
                 Width="100" Margin="125,0,575,0"/>
-
-        <Button Content="Export Data" 
-                Command="{Binding ExportFileCommand}" 
-                Grid.Row="0"
-                Height="60"
-                Width="100" Margin="500,0,200,0"/>
 
         <Button Name="delete" Content="Delete" 
                 Grid.Row="0"

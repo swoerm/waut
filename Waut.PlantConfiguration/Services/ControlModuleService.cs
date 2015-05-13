@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Waut.PlantConfiguration.Models;
+//using Microsoft.Practices.Prism.Mvvm;
+//Excel
 using System.Xml.Serialization;
 using System.IO;
 using System.Data;
@@ -13,10 +15,9 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 
-
 namespace Waut.PlantConfiguration.Services
 {
-    public class ControlModuleService : IControlModuleService 
+    public class ControlModuleService : ObservableCollection<ControlModule> //, IControlModuleService
     {
         public string FileName { get; set; }
 
@@ -24,9 +25,8 @@ namespace Waut.PlantConfiguration.Services
         {
 
         }
-        //public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-
+        #region GetControlModule
         public List<ControlModule> GetControlModules(string FileName)
         {
             Console.WriteLine("Added to list!!");
@@ -43,7 +43,7 @@ namespace Waut.PlantConfiguration.Services
             list.Add(cm);
             //***************Sample Entry***************
 
-            string con = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + FileName + ";Extended Properties='Excel 8.0;HDR=Yes;'";
+            string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + FileName + ";Extended Properties='Excel 8.0;HDR=Yes;'";
             //string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\..\..\Waut.PlantConfiguration\Data\SAB_ONITSHSA_IO_List_BH_PLC1_REV14.xls;Extended Properties='Excel 8.0;HDR=Yes;'";
             string num = "123";
             using (OleDbConnection connection = new OleDbConnection(con))
@@ -110,6 +110,7 @@ namespace Waut.PlantConfiguration.Services
                                     cm.Sheet = excelSheets[k];
                                     cm.File = FileName;
                                     list.Add(cm);
+                                    //Console.WriteLine(cm.Description);
                                 }
                             }
                         }
@@ -121,11 +122,158 @@ namespace Waut.PlantConfiguration.Services
                 }
             }
             list.Add(cm);
+            #endregion GetControlModule
+
+            //***************PLAY****************
+            string myPlayFile = @"C:\Users\snel\Desktop\BugTypes.mdb";
+            
+            string myTableName1 = "Categories";
+            SaveData(myPlayFile, myTableName1);
+            string myTableName2 = "People";
+            SaveData(myPlayFile, myTableName2);
           
+            string myTempSQL = @"C:\Users\snel\Desktop\BugTypes.mdb";
+            string mySQLTable = "NewModule";
+            SaveControlModule(list, myTempSQL, mySQLTable);
+            //***************PLAY****************
             return list;
         }
-        //#region INotifyCollectionChanged Members
-        //public event NotifyCollectionChangedEventHandler CollectionChanged;
-        //#endregion
+        public void SaveControlModule(List<ControlModule> pastList, string fileName, string tableName)
+        {
+            Console.WriteLine("GotMe");//Just a marker
+
+#if         USINGPROJECTSYSTEM  // Set Access connection and select strings.
+            string con = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + FileName + ";Extended Properties='Excel 8.0;HDR=Yes;'";
+#else
+            string conn = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName;
+#endif
+            string strAccessSelect = "SELECT * FROM " + tableName;
+
+            // Create the dataset and add the Categories table to it:
+           // DataSet myDataSet = new DataSet();
+            OleDbConnection myAccessConn = null;
+            try
+            {
+                myAccessConn = new OleDbConnection(conn);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: Failed to create a database connection. \n{0}", ex.Message);
+                return;
+            }
+            try
+            {
+                OleDbCommand myAccessCommand = new OleDbCommand(strAccessSelect, myAccessConn);
+                OleDbDataAdapter myDataAdapter = new OleDbDataAdapter(myAccessCommand);
+
+                myAccessConn.Open();
+
+                OleDbCommand addObj = null;//Add a new entry 
+                for (int j = 0; j < pastList.Count; j++)
+                {
+                    Console.WriteLine(pastList[j].UoM);
+                    string strSQL = "INSERT INTO NewModule (Description, Type, UoM, Format, Sheet, File) " + "VALUES ( '" + pastList[j].Description + "' , '" +
+                    pastList[j].Type + "' ,'" + pastList[j].UoM + "' ,'" + pastList[j].Format + "' ,'" + pastList[j].Sheet + "' ,'" + pastList[j].File + "')";
+                    addObj = new OleDbCommand(strSQL, myAccessConn);
+                    addObj.ExecuteNonQuery();
+
+                    string strNumSQL = "INSERT INTO NewModule (Number) " + "VALUES ( '" + pastList[j].Number + "')";
+                    addObj = new OleDbCommand(strNumSQL, myAccessConn);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: Failed to retrieve the required data from the DataBase.\n{0}", ex.Message);
+                return;
+            }
+            finally
+            {
+                myAccessConn.Close();
+            }
+        }
+
+        #region PlayArea
+        //*****************************PLAY AREA***************************************
+        public void SaveData(string fileName, string tableName)
+        {
+            Console.WriteLine("GotMe");//Just a marker
+
+    #if USINGPROJECTSYSTEM  // Set Access connection and select strings.
+            string con = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + FileName + ";Extended Properties='Excel 8.0;HDR=Yes;'";
+    #else
+            string conn = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName;
+    #endif
+            string strAccessSelect = "SELECT * FROM "+ tableName;
+
+            // Create the dataset and add the Categories table to it:
+            DataSet myDataSet = new DataSet();
+            OleDbConnection myAccessConn = null;
+            try
+            {
+                myAccessConn = new OleDbConnection(conn);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: Failed to create a database connection. \n{0}", ex.Message);
+                return;
+            }
+
+            try
+            {
+                OleDbCommand myAccessCommand = new OleDbCommand(strAccessSelect, myAccessConn);
+                OleDbDataAdapter myDataAdapter = new OleDbDataAdapter(myAccessCommand);
+
+                myAccessConn.Open();
+                myDataAdapter.Fill(myDataSet, tableName);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: Failed to retrieve the required data from the DataBase.\n{0}", ex.Message);
+                return;
+            }
+            finally
+            {
+                OleDbCommand addObj = null;//Add a new entry sample
+                if (tableName == "People")
+                {
+                    string strSQL = "INSERT INTO People (FirstName , SurName ) " + "VALUES ( 'Beth' , 'Hart' )";
+                    addObj = new OleDbCommand(strSQL, myAccessConn);
+                    addObj.ExecuteNonQuery();
+                }
+                myAccessConn.Close();
+            }
+
+            DataTableCollection dta = myDataSet.Tables;// A dataset can contain multiple tables, so let's get them all into an array:
+
+            foreach (DataTable dt in dta)
+            {
+                Console.WriteLine("Found data table {0}", dt.TableName);
+            }
+
+            Console.WriteLine("{0} tables in data set", myDataSet.Tables.Count);
+            Console.WriteLine("{0} tables in data set", dta.Count);
+            Console.WriteLine("{0} rows in Categories table", myDataSet.Tables[tableName].Rows.Count);
+            Console.WriteLine("{0} columns in Categories table", myDataSet.Tables[tableName].Columns.Count);
+            
+            DataColumnCollection drc = myDataSet.Tables[tableName].Columns;
+            int i = 0;
+            foreach (DataColumn dc in drc)
+            {
+                Console.WriteLine("Column name[{0}] is {1}, of type {2}", i++, dc.ColumnName, dc.DataType); // Print the column subscript, then the column's name and its data type:
+            }
+
+            DataRowCollection dra = myDataSet.Tables[tableName].Rows;
+            foreach (DataRow dr in dra)
+            {
+                Console.WriteLine(tableName + "[{0}] is {1}", dr[0], dr[1]);// Print the CategoryID as a subscript, then the CategoryName:
+            }
+            Console.ReadLine();
+         }
+        //*****************************PLAY AREA***************************************
+        #endregion PlayArea
     }
 }
+
+
+
