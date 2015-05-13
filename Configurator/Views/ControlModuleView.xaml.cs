@@ -46,4 +46,4 @@ namespace Waut.Configurator.Views
         #endregion ViewComponents
     }
 }
-}
+

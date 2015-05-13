@@ -25,7 +25,7 @@ namespace Waut.Configurator.Views
         {
             InitializeComponent();
 
-            UnitViewModel x = DataContext as UnitViewModel;
+            //UnitViewModel x = DataContext as UnitViewModel;
         }
         #region ViewComponents
         void OnClickDelete(object sender, RoutedEventArgs e)

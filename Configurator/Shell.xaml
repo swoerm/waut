@@ -4,6 +4,6 @@
         xmlns:views="clr-namespace:Waut.Configurator.Views"
         Title="Shell" Height="300" Width="300">
     <Grid>
-        <views:ControlModuleView/>
+        <views:MainView/>
     </Grid>
 </Window>

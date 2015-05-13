@@ -38,8 +38,8 @@ namespace Waut.PlantConfiguration.Services
             //***************Sample Entry***************
             string[] arr = { "SAMPLE", "121", "Type", "Unit", "Format", "Krones", "Project", "1", "2", "3", "4" ,"PLCWhat","SheetWhat"};
             cm = new ControlModule();
-            cm.Description = arr[0];cm.Number = 1234;cm.Type = arr[2];cm.UoM = arr[3];cm.Format = arr[4];cm.KronesSymbol = arr[5];
-            cm.ProjectSymbol = arr[6]; cm.Symbol1 = arr[7]; cm.Symbol2 = arr[8]; cm.Symbol3 = arr[9]; cm.Symbol4 = arr[10]; cm.Sheet = arr[11]; cm.File = arr[12];
+//            cm.Description = arr[0];cm.Number = 1234;cm.Type = arr[2];cm.UoM = arr[3];cm.Format = arr[4];cm.KronesSymbol = arr[5];
+//            cm.ProjectSymbol = arr[6]; cm.Symbol1 = arr[7]; cm.Symbol2 = arr[8]; cm.Symbol3 = arr[9]; cm.Symbol4 = arr[10]; cm.Sheet = arr[11]; cm.File = arr[12];
             list.Add(cm);
             //***************Sample Entry***************
 
@@ -105,8 +105,8 @@ namespace Waut.PlantConfiguration.Services
                                     cm.Symbol2 = arr[3];
                                     cm.Symbol3 = arr[4];
                                     cm.Symbol4 = arr[5];
-                                    cm.ProjectSymbol = arr[2] + arr[4];//What is the arrangement
-                                    cm.KronesSymbol = arr[3] + arr[5];//What is the arrangement
+                                    //cm.ProjectSymbol = arr[2] + arr[4];//What is the arrangement
+                                    //cm.KronesSymbol = arr[3] + arr[5];//What is the arrangement
                                     cm.Sheet = excelSheets[k];
                                     cm.File = FileName;
                                     list.Add(cm);
