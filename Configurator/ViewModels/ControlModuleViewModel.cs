@@ -1,33 +1,30 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Waut.PlantConfiguration.Models;
 using Waut.PlantConfiguration.Services;
-//using Waut.Configurator.ViewModels;
-//using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Win32;
 using System.Windows;
-using System.Collections;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Windows.Data;
 using System.Runtime.CompilerServices;
-
 
 namespace Waut.Configurator.ViewModels
 {
-    public class ControlModuleViewModel : BindableBase, INotifyPropertyChanged//, ObservableCollection<ControlModule>
+    public class ControlModuleViewModel : BindableBase, INotifyPropertyChanged
     {
+        List<ControlModule> passList = new List<ControlModule>();//Temp list to pass ObservableCollection to SaveControlModule
 
-        public ControlModuleViewModel(/*ObservableCollection<ControlModuleService> service*/)
+        public ObservableCollection<ControlModule> controlModules;
+
+        public ControlModuleViewModel()
         {
             importFileCommand = new RelayCommand(ImportX);
+            exportFileCommand = new RelayCommand(ExportX);
         }
+
+        #region ImportFile
         public void ImportX(object obj)
         {
             Console.WriteLine("Hello Model");
@@ -40,17 +37,14 @@ namespace Waut.Configurator.ViewModels
             dlg.RestoreDirectory = true;
 
             Nullable<bool> result = dlg.ShowDialog();
-            string name;
+
             if (result == true)
             {
                 try
                 {
-                    name = dlg.FileName;
-                    ControlModuleService service = new ControlModuleService(); //Add binding here
-                    service.GetControlModules(name);
-                    // this.service.cm = 
-
-                    Console.WriteLine(name);
+                    Name = dlg.FileName;
+                    GetControlModules();
+                    Console.WriteLine(Name);
                 }
                 catch (Exception ex)
                 {
@@ -69,16 +63,83 @@ namespace Waut.Configurator.ViewModels
             set
             { }
         }
-        public List<ControlModule> GetControlModules()
-        {
+        #endregion ImportFile
 
+        #region ExportFile
+
+        private ICommand exportFileCommand;
+        public ICommand ExportFileCommand
+        {
+            get
+            {
+                return exportFileCommand;
+            }
+            set
+            { }
+        }
+        public void ExportX(object obj)
+        {
+            Console.WriteLine("Hello Model");
+
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            dlg.InitialDirectory = "c:\\";
+            dlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            dlg.FilterIndex = 2;
+            dlg.RestoreDirectory = true;
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                try
+                {
+                    Name = dlg.FileName;
+
+                    ControlModuleBotecService serviceSave = new ControlModuleBotecService();
+
+                    serviceSave.SaveControlModule(passList, Name, "NewModule");
+                    MessageBox.Show("Data saved to " + Name);
+
+                    Console.WriteLine(Name);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not write file to disk. Original error: " + ex.Message);
+                }
+            }
+        }
+        #endregion ExportFile
+
+        #region ControlModule
+        public ObservableCollection<ControlModule> ControlModules
+        {
+            get
+            {
+                if (controlModules == null)
+                {
+                    controlModules = new ObservableCollection<ControlModule>();
+                }
+                return controlModules;
+            }
+            set
+            {
+                controlModules = value;
+                NotifyPropertyChanged("ControlModules");
+            }
+        }
+        public void GetControlModules()
+        {
             ControlModuleService service = new ControlModuleService();
 
-            //ImportX;
-
-            return service.GetControlModules(@"C:\Users\snel\Desktop\PLC1.xls");
+            ControlModules = new ObservableCollection<ControlModule>(service.GetControlModules(Name));
+            //Change OberservableCollection back to list         
+            List<ControlModule> myList = new List<ControlModule>(ControlModules);
+            passList = myList;     
         }
+        #endregion ControlModule
 
+        #region Attempt EventHandler
         public event PropertyChangedEventHandler PropertyChanged;
         public string name;
 
@@ -102,24 +163,6 @@ namespace Waut.Configurator.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        // public ICollectionView service { get; set; }
-
-
-        //**********************
-        private ICommand loadFileCommand;
-        public ICommand ReadDataCommand
-        {
-
-            get
-            {
-                return loadFileCommand;
-            }
-            set
-            {
-                loadFileCommand = value;
-                Console.WriteLine("Hello Model");
-            }
-        }
+        #endregion Attempt EventHandler       
     }
 }
