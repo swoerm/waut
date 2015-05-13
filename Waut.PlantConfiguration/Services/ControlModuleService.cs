@@ -32,28 +32,28 @@ namespace Waut.PlantConfiguration.Services
 
             //*****************************************************************************************************************
             //*****************************************************************************************************************
-            SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
+            //SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
 
-            ExcelFile ef = ExcelFile.Load(FileName);
+            //ExcelFile ef = ExcelFile.Load(FileName);
 
-            // Select the first worksheet from the file.
-            ExcelWorksheet ws = ef.Worksheets[0];
+            //// Select the first worksheet from the file.
+            //ExcelWorksheet ws = ef.Worksheets[0];
 
-            DataTable dataTable = ws.CreateDataTable(new CreateDataTableOptions()
-            {
-                ColumnHeaders = true,
-                StartRow = 1,
-                NumberOfColumns = 5,
-                NumberOfRows = ws.Rows.Count - 1,
-                Resolution = ColumnTypeResolution.AutoPreferStringCurrentCulture
-            });
+            //DataTable dataTable = ws.CreateDataTable(new CreateDataTableOptions()
+            //{
+            //    ColumnHeaders = true,
+            //    StartRow = 1,
+            //    NumberOfColumns = 5,
+            //    NumberOfRows = ws.Rows.Count - 1,
+            //    Resolution = ColumnTypeResolution.AutoPreferStringCurrentCulture
+            //});
 
-            // Write DataTable content
-            foreach (DataRow row in dataTable.Rows)
-            {
-                Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}", row[0], row[1], row[2], row[3], row[4]);
-                Console.WriteLine();
-            }
+            //// Write DataTable content
+            //foreach (DataRow row in dataTable.Rows)
+            //{
+            //    Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}", row[0], row[1], row[2], row[3], row[4]);
+            //    Console.WriteLine();
+            //}
 
             //Console.WriteLine(sb.ToString());
             //*****************************************************************************************************************
