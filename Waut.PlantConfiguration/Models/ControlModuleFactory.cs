@@ -19,7 +19,7 @@ namespace Waut.PlantConfiguration.Models
             bool isNumericOut = Int32.TryParse(arr[11], out outByte);
 
 
-            if (arr[6] != "" && arr[6] != "DESCRIPTION")
+            if (arr[6] != "" && arr[6] != "DESCRIPTION" && arr[6] != null)
             {
                 //Console.WriteLine(isNumericIn + "   " + isNumericOut);
                 //Console.WriteLine(" IN: " + inByte + " OUT: " + outByte);

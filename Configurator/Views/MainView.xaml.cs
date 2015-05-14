@@ -20,7 +20,7 @@ namespace Waut.Configurator.Views
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainView : Window, IView
+    public partial class MainView : UserControl, IView
     {
         public MainView()
         {

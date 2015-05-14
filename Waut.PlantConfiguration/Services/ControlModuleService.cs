@@ -6,6 +6,7 @@ using System.IO;
 using System.Data;
 using System.Data.OleDb;
 using System.Collections.ObjectModel;
+using Excel;
 
 
 //Excel  
@@ -28,7 +29,67 @@ namespace Waut.PlantConfiguration.Services
 
             List<ControlModule> list = new List<ControlModule>();/////
 
-            string[] arr = new string[40];
+            
+            int wrongRead = 0;
+            var file = new FileInfo(FileName);
+            using (var stream = new FileStream(FileName, FileMode.Open))
+            {
+                IExcelDataReader reader = null;
+                if (file.Extension == ".xls")
+                {
+                    reader = ExcelReaderFactory.CreateBinaryReader(stream);
+
+                }
+                else if (file.Extension == ".xlsx")
+                {
+                    reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                }
+
+                if (reader == null)
+                    return null;
+                reader.IsFirstRowAsColumnNames = false;
+                DataSet ds = reader.AsDataSet();
+
+                foreach (DataTable table in ds.Tables)
+                {
+                    foreach (DataRow row in table.Rows)
+                    {
+
+                        string[] arr = new string[40];
+                        //foreach (var value in row.ItemArray)
+                        //{
+                        //    Console.WriteLine("{0}, {1}", value, value.GetType());
+                        //}
+                        for (int j = 0; j < 23; j++)
+                        {
+
+                            arr[j] = row.ItemArray[j].ToString();
+
+                            
+                        }
+
+                        ControlModule cm = ControlModuleFactory.CreateControlModuleXLS(arr);
+
+                        if (cm != null)
+                        {
+                            Console.WriteLine(cm.Description);
+
+                            if (string.IsNullOrEmpty(cm.Symbol1))
+                            {
+                                Console.WriteLine("sf");
+                                wrongRead++;
+                            }
+                            list.Add(cm);
+                        }
+
+                    }
+                }
+
+                
+            }
+            Console.WriteLine("Wrong: " + wrongRead);
+            return list;
+            
 
             //*****************************************************************************************************************
             //*****************************************************************************************************************
@@ -61,82 +122,83 @@ namespace Waut.PlantConfiguration.Services
       
 
             //***************Sample Entry***************
-            int wrongRead = 0;
-            string con = @";Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + FileName + ";Extended Properties='Excel 8.0;IMEX=1;HDR=NO;TypeGuessRows=0'";
-            using (OleDbConnection connection = new OleDbConnection(con))
-            {
-                connection.Open();
+            //int wrongRead = 0;
+            //string con = @";Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + FileName + ";Extended Properties='Excel 8.0;IMEX=1;HDR=NO;TypeGuessRows=0'";
+            //using (OleDbConnection connection = new OleDbConnection(con))
+            //{
+            //    connection.Open();
                 
-                //***************Get all worksheet names***************
-                DataTable dt = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+            //    //***************Get all worksheet names***************
+            //    DataTable dt = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                
-                if (dt == null)
-                {
-                    return null;
-                }
+            //    if (dt == null)
+            //    {
+            //        return null;
+            //    }
 
-                String[] excelSheets = new String[dt.Rows.Count];
-                int i = 0;
+            //    String[] excelSheets = new String[dt.Rows.Count];
+            //    int i = 0;
 
 
-                foreach (DataRow row in dt.Rows)
-                {
-                    excelSheets[i] = row["TABLE_NAME"].ToString();
-                    i++;
-                }
+            //    foreach (DataRow row in dt.Rows)
+            //    {
+            //        excelSheets[i] = row["TABLE_NAME"].ToString();
+            //        i++;
+            //    }
 
-                for (int j = 0; j < excelSheets.Length; j++)
-                {
-                    Console.WriteLine(excelSheets[j]);
-                }
-                Console.WriteLine(excelSheets.Length);
+            //    for (int j = 0; j < excelSheets.Length; j++)
+            //    {
+            //        Console.WriteLine(excelSheets[j]);
+            //    }
+            //    Console.WriteLine(excelSheets.Length);
 
-                //***************Get all worksheet names***************
-                for (int k = 0; k < excelSheets.Length; k++)//Loop through all worksheets
-                {
-                    try  //Exception to catch missing worksheet
-                    {
-                        OleDbCommand command = new OleDbCommand("select * from [" + excelSheets[k] + "]", connection);
-                        //command.Parameters.AddWithValue("@mySheet", excelSheets[k]);
+            //    //***************Get all worksheet names***************
+            //    for (int k = 0; k < excelSheets.Length; k++)//Loop through all worksheets
+            //    {
+            //        try  //Exception to catch missing worksheet
+            //        {
+            //            OleDbCommand command = new OleDbCommand("select * from [" + excelSheets[k] + "]", connection);
+            //            //command.Parameters.AddWithValue("@mySheet", excelSheets[k]);
                        
-                        using (OleDbDataReader dr = command.ExecuteReader())
-                        {
-                            while (dr.Read())
-                            {
-                                for (int j = 0; j < 23; j++)
-                                {
-                                    var column = dr[j];
-                                    arr[j] = column.ToString();
-                                }
+            //            using (OleDbDataReader dr = command.ExecuteReader())
+            //            {
+            //                while (dr.Read())
+            //                {
+            //                    for (int j = 0; j < 23; j++)
+            //                    {
+            //                        var column = dr[j];
+            //                        arr[j] = column.ToString();
+            //                    }
 
-                                ControlModule cm = ControlModuleFactory.CreateControlModuleXLS(arr);
+            //                    ControlModule cm = ControlModuleFactory.CreateControlModuleXLS(arr);
                                 
-                                if (cm != null)
-                                {
-                                    Console.WriteLine(cm.Description);
+            //                    if (cm != null)
+            //                    {
+            //                        Console.WriteLine(cm.Description);
 
-                                    if (string.IsNullOrEmpty(cm.Symbol1))
-                                    {
-                                        Console.WriteLine("sf");
-                                        wrongRead++;
-                                    }
-                                    list.Add(cm); 
-                                }
+            //                        if (string.IsNullOrEmpty(cm.Symbol1))
+            //                        {
+            //                            Console.WriteLine("sf");
+            //                            wrongRead++;
+            //                        }
+            //                        list.Add(cm); 
+            //                    }
                                     
-                            }
-                        }
+            //                }
+            //            }
                            
-                    }
-                    catch (OleDbException ex)
-                    {
-                        Console.WriteLine(ex.ToString());//Display 
-                    }
-                }
-            }
-            Console.WriteLine("Wrong: " + wrongRead);
-            return list;
+            //        }
+            //        catch (OleDbException ex)
+            //        {
+            //            Console.WriteLine(ex.ToString());//Display 
+            //        }
+            //    }
+            //}
+            //Console.WriteLine("Wrong: " + wrongRead);
+            //return list;
         #endregion GetControlModule
         }
+
     }
 }
 

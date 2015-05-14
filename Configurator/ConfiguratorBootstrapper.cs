@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Practices.Prism.MefExtensions;
 using System.Windows;
 using Waut.Configurator.ViewModels;
+using Waut.PlantConfiguration;
 
 
 namespace Waut.Configurator
@@ -16,7 +17,7 @@ namespace Waut.Configurator
         protected override void ConfigureAggregateCatalog()
         {
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ConfiguratorBootstrapper).Assembly));
-//            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ControlModuleViewModel).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(PlantConfigurationModule).Assembly));
             //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(MarketModule).Assembly));
             //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(PositionModule).Assembly));
             //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(WatchModule).Assembly));
